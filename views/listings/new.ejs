@@ -1,26 +1,51 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wanderlust</title>
-</head>
-<body>
-    <h3>Create a New Listing</h3>
+ <% layout("/layouts/boilerplate") %>
+ <div class="row mt-3"><!--form bohot bada h toh ek hi page me lane ke liye row use kr rhe h -->
+    <div class="col-8 offset-2"><!--ye hamra col div banega means 7-8  pats me divide krega -->
+    <br><br>
+        <h3>Create a New Listing</h3>
     <form method="POST" action="/listings">
-        <input name="listing[title]" placeholder="enter title" type="text"/><!--listing object and key is title-->
-    <br/>   <br/>
-        <textarea name="listing[description]" placeholder="enter description"></textarea>
-         <br/>   <br/>
-        <input name="listing[image]" placeholder="enter image URL/Link" type="text"/>
-         <br/>   <br/>
-        <input name="listing[price]" placeholder="enter price" type="number"/>
-         <br/>   <br/>
-        <input name="listing[country]" placeholder="enter country" type="text"/>
-         <br/>
-       <input name="listing[location]" placeholder="enter location" type="text"/>
-        <br/>   <br/>
-        <button>Add</button>
+        <div  class="mb-3">
+        <lables for="title"class="form-label">Title</lable>
+        <input name="listing[title]" 
+        placeholder="Add a catchy title" 
+        type="text"
+        class="form-control"
+        />    <!--listing object and key is title-->
+   </div>
+
+      <div  class="mb-3">
+        <lable for="description"class="form-label">Description</lable>
+        <textarea 
+        name="listing[description]" 
+        class="form-control"></textarea>
+        </div>
+
+         <div class="mb-3">
+              <lable for="image"class="form-label" class="form-label">Image Link</lable> 
+              <input name="listing[image]" placeholder="enter image URL/Link" type="text" class="form-control"/>
+         </div>
+
+         <div class="row">
+        <div class="mb-3 col-md-4"><!--screen choti krne pr country &price ek line pe aa jaye useke liye md use krenge -->
+                                   <!--lg and sm me same hi rhega ek hi line me -->
+        <lable for="price"class="form-label" class="form-label">Price</lable> 
+        <input name="listing[price]" 
+        placeholder="1200" type="number" class="form-control"/><!--sample price:1200-->
+        </div>
+        
+        <div class="mb-3 col-md-8">
+         <lable for="country"class="form-label" class="form-label">country</lable> 
+         <input name="listing[country]" placeholder="India" type="text" class="form-control"/>
+        </div>
+        </div>
+        <div class="mb-3">
+     <lable for="location"class="form-label" class="form-label">Location</lable> 
+       <input name="listing[location]" placeholder="Jaipur,Rajasthan" type="text" class="form-control"/>
+       </div>
+
+     
+        <button class="btn btn-dark add-btn mt-3">Add</button>
+     
     </form>
-</body>
-</html>
+    </div>
+    </div>
