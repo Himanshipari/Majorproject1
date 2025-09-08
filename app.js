@@ -63,7 +63,12 @@ app.get("/listings/new",(req,res)=>{
 app.get("/listings/:id", wrapAsync(async(req,res)=>{
     let {id}=req.params;
     const listing=await Listing.findById(id);
+      if(!listing){
+         await newListing.save();
+        return res.redirect("/listings");
+    }
     res.render("listings/show.ejs", {listing});
+  
 })
 );
 
@@ -74,13 +79,16 @@ app.post("/listings",
     //let {title, description, image,price,country,location}=req.body;
      const newListing=newListing(req.body.listing)
     await newListing.save();
-     res.redirect("/listings");
+    return res.redirect("/listings");
 })
 );
 //Edit Route
 app.get("/listings/:id/edit",wrapAsync(async(req,res)=>{
      let {id}=req.params;
     const listing=await Listing.findById(id);
+    if(!listing){
+        return res.redirect("/listings");
+    }
     res.render("listings/edit.ejs",{listing});
 })
 );
@@ -90,7 +98,7 @@ app.put("/listings/:id",
     wrapAsync(async(req,res)=>{
     let { id }=req.params;
     await Listing.findByIdAndUpdate(id, {...req.body.listing});
-    res.redirect(`/listings/${id}`);
+   return res.redirect(`/listings/${id}`);
 })
 );
 //Delete Route
