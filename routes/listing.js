@@ -55,7 +55,7 @@ router.post("/",
 router.get("/:id/edit",wrapAsync(async(req,res)=>{
      let {id}=req.params;
     const listing=await Listing.findById(id);
-      console.log(listing.image);
+
     if(!listing){
         return res.redirect("/listings");
     }
