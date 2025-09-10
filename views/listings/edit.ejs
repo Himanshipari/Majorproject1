@@ -22,11 +22,15 @@
        
          <div  class="mb-3">
              <lables for="image"class="form-label">Image</lable>
-            <input name="listing[image][url]" 
-            value="<%=listing.image.url%>" 
+            <input name="listing[image]" 
+            value="<%=listing.image%>" 
              type="text"  
              class="form-control"required/>
                <div class="invalid-feedback">Plz enter a valid link for image</div>
+               <% if (listing.image) { %>
+  <img src="<%= listing.image %>" alt="Listing Image" class="img-fluid mt-2" style="max-height: 200px;">
+<% } %>
+
          </div>
         <div class="row">
          <div  class="mb-3 col-md-4">
