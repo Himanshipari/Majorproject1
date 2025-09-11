@@ -46,6 +46,16 @@ router.post("/",
     validateListing,
     wrapAsync(async(req,res,next)=>{
     //let {title, description, image,price,country,location}=req.body;
+// Handle image URL properly for new listings
+    if (req.body.listing.image && req.body.listing.image.url) {
+      req.body.listing.image = {
+        url: req.body.listing.image.url,
+        filename: 'listingimage'
+      };
+    } else {
+      // If no image URL provided, set to null to use default
+      req.body.listing.image = null;
+    }
      const newListing=new Listing(req.body.listing)//2
     await newListing.save();
     return res.redirect("/listings");
@@ -73,6 +83,9 @@ router.put("/:id",
         url: req.body.listing.image,
         filename: 'listingimage'
       };
+    } else if (req.body.listing.image === "") {
+      // If image URL is empty string, set to null to use default
+      req.body.listing.image = null;
     }
     await Listing.findByIdAndUpdate(id, {...req.body.listing});
    return res.redirect(`/listings/${id}`);
