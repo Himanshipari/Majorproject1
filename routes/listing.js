@@ -67,6 +67,13 @@ router.put("/:id",
    validateListing,
     wrapAsync(async(req,res)=>{
     let { id }=req.params;
+    // Handle image URL properly
+    if (req.body.listing.image) {
+      req.body.listing.image = {
+        url: req.body.listing.image,
+        filename: 'listingimage'
+      };
+    }
     await Listing.findByIdAndUpdate(id, {...req.body.listing});
    return res.redirect(`/listings/${id}`);
 })
